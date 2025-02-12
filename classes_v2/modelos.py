@@ -1,3 +1,9 @@
+#######################################
+# Codigo feito por: Gonçalo Feliciano #
+#     Fork feito por: ShovCkOk        #
+#            Data: 02/2025            #
+#######################################
+
 from dataclasses import dataclass
 
 
