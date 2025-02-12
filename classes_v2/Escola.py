@@ -40,40 +40,61 @@ class Escola:
 
 
     def listarAlunos(self):
-        pass
-
+        return [aluno.nome for aluno in self.alunos]
+    
     def listarProfessores(self):
-        pass
+        return [professor.nome for professor in self.professores]
+    
+    def add_aluno(self, aluno):
+        self.alunos.append(aluno)
+    
+    def add_professor(self, professor):
+        self.professores.append(professor)
+    
+    def melhorNota(self, ufcd=None, aluno=None):
+        notas = []
+        for a in self.alunos:
+            if aluno and a != aluno:
+                continue
+            for u, nota in a.notas.items():
+                if ufcd and u != ufcd:
+                    continue
+                notas.append(nota)
+        return max(notas) if notas else None
+    
+    def piorNota(self, ufcd=None, aluno=None):
+        notas = []
+        for a in self.alunos:
+            if aluno and a != aluno:
+                continue
+            for u, nota in a.notas.items():
+                if ufcd and u != ufcd:
+                    continue
+                notas.append(nota)
+        return min(notas) if notas else None
+    
+    def piorMedia(self, ufcd=None, aluno=None, aprovado=True):
+        medias = []
+        for a in self.alunos:
+            if aluno and a != aluno:
+                continue
+            media = sum(a.notas.values()) / len(a.notas) if a.notas else 0
+            if aprovado and media < 10:
+                continue
+            if not aprovado and media >= 10:
+                continue
+            medias.append((a.nome, media))
+        return min(medias, key=lambda x: x[1]) if medias else None
+    
+    def melhorMedia(self, ufcd=None, aluno=None):
+        medias = []
+        for a in self.alunos:
+            if aluno and a != aluno:
+                continue
+            media = sum(a.notas.values()) / len(a.notas) if a.notas else 0
+            medias.append((a.nome, media))
+        return max(medias, key=lambda x: x[1]) if medias else None
 
-    def add_aluno(self, aluno:Aluno):
-        pass
-
-    def add_professor(self, professor:Professor):
-        pass
-
-    def melhorNota(self, ufcd:str = None, aluno:Aluno = None):
-        pass
-
-    def piorNota(self, ufcd:str = None, aluno:Aluno = None):
-        pass
-
-
-
-    def piorMedia(self, ufcd: str = None, aluno: Aluno = None, aprovado:bool = True):
-        """
-        Lista os alunos com pior media
-
-        :param aporvado:
-            - True para listar os alunos aprovados,
-            - False para listar os alunos reprovados,
-
-        um Aluno aprovado e um aluno com media >= 10
-
-        """
-        pass
-
-    def melhorMedia(self, ufcd: str = None, aluno: Aluno = None):
-        pass
 
 
     def __int__(self):
